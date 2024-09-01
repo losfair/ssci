@@ -37,7 +37,7 @@ Deno or Node:
 ```bash
 mkdir securelink
 cd securelink
-wget -O securelink.tar.gz https://github.com/losfair/ssci/releases/download/v0.1.1/securelink-v0.1.1.tar.gz
+wget -O securelink.tar.gz https://github.com/losfair/ssci/releases/download/v0.1.2-alpha.1/securelink-v0.1.2-alpha.1.tar.gz
 tar -xvf securelink.tar.gz
 cosign verify-blob --bundle SHA256SUMS.bundle.json --certificate-identity-regexp '^https://github\.com/losfair/ssci/' --certificate-oidc-issuer 'https://token.actions.githubusercontent.com' SHA256SUMS
 sha256sum -c SHA256SUMS
