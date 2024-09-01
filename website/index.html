@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSCI</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="canonical" href="https://ssci.dev/">
+</head>
+
+<body>
+  <main>
+    <header class="header">
+      <h1 class="header-title">SSCI: Server Side Code Integrity</h1>
+      <p><a href="https://github.com/losfair/ssci">https://github.com/losfair/ssci</a></p>
+    </header>
+
+    <pre style="background-color: #f0f0f0; padding: 1em; border-radius: 0.5em; overflow-x: auto; text-align:left">
+proxy_command="deno run --allow-net --allow-env \
+    https://ssci.dev/run/connect.min.mjs \
+    --remote-url "ws://demo.ssci.dev:8000" \
+    --github-repository losfair/whoami.ssci.dev"
+ssh -o "ProxyCommand $proxy_command" \
+    -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" \
+    user@enclave</pre>
+  </main>
+
+  <footer>
+    <p>Project by <a href="https://su3.io">Heyang Zhou</a> | Template <a href="https://github.com/lumeland/theme-simple-me">Simple Me</a></p>
+  </footer>
+</body>
+</html>

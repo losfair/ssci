@@ -1,0 +1,58 @@
+
+@import "https://unpkg.com/@lumeland/ds@0.5.2/ds.css";
+.header {
+  font: var(--font-body);
+  margin-bottom: min(5vh, 100px);
+  color: var(--color-text);
+
+  p {
+    margin: 0;
+    text-wrap: balance;
+
+    + p {
+      margin-top: .5em;
+    }
+  }
+}
+.header-title {
+  font: var(--font-title);
+  letter-spacing: var(--font-title-spacing);
+  margin: .5em 0 0;
+  color: var(--color-base);
+}
+.header-theme {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+}
+
+body {
+  display: grid;
+  grid-template-columns: minmax(0, 640px);
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+  text-align: center;
+  padding: max(20px, 5vh) 20px;
+  row-gap: 20px;
+  justify-content: center;
+  align-content: center;
+}
+main {
+  align-self: center;
+}
+footer {
+  font: var(--font-small);
+  color: var(--color-dim);
+
+  > * {
+    margin: 0;
+  }
+
+  > * + * {
+    margin-top: 1em;
+  }
+
+  a {
+    color: inherit;
+  }
+}

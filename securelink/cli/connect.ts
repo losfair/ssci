@@ -14,6 +14,7 @@ import arg from "arg"
         "--github-repository": String,
         "--github-commit-sha": String,
         "--remote-url": String,
+        "--remote-port": Number,
     });
 
     const githubRepoNameRegex = /^([a-zA-Z0-9_.-]+)\/([a-zA-Z0-9_.-]+)$/;
@@ -42,7 +43,13 @@ import arg from "arg"
             agent: new HttpsProxyAgent(httpProxy)
         });
     }
-    const session = await Session.open(vw, ws as unknown as globalThis.WebSocket, 22);
+
+    const remotePort = args["--remote-port"] ?? 2222;
+    if (!Number.isSafeInteger(remotePort) || remotePort <= 0 || remotePort > 65535) {
+        throw new Error("Invalid --remote-port");
+    }
+
+    const session = await Session.open(vw, ws as unknown as globalThis.WebSocket, remotePort);
     console.warn("Remote PCRs verified with Nitro Enclave attestation:");
     for (let i = 0; i < session.pcrs.length; i++) {
         console.warn(` ${i}: ${session.pcrs[i]}`);
