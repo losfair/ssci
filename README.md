@@ -15,6 +15,15 @@ log, and the state of the Rekor log has been
 The connection is secured by X25519 + ChaCha20-Poly1305. Nobody between you and
 the enclave can see the data.
 
+## Demo
+
+The following demo application
+([source](https://github.com/losfair/whoami.ssci.dev)) is accessible via SSH. It
+prints the SSH public keys that your client uses to authenticate, but nobody
+except you can see them - not even us.
+
+Try it out:
+
 ```bash
 proxy_command="deno run --allow-net --allow-env https://ssci.dev/run/connect.min.mjs --remote-url "ws://demo.ssci.dev:8000" --github-repository losfair/whoami.ssci.dev"
 ssh -o "ProxyCommand $proxy_command" -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking no" user@enclave
