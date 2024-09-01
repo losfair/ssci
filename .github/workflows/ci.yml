@@ -110,3 +110,43 @@ jobs:
         directory: web
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
         branch: main
+  release:
+    runs-on: ubuntu-22.04
+    permissions:
+      id-token: write
+      contents: write
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+    - build-enclave-rpc
+    - build-securelink
+    env:
+      PACKAGE_NAME_ENCLAVE_RPC: enclave-rpc-${{ github.ref_name }}.tar.gz
+      PACKAGE_NAME_SECURELINK: securelink-${{ github.ref_name }}.tar.gz
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Download artifacts (enclave-rpc)
+      uses: actions/download-artifact@v4
+      with:
+        name: enclave-rpc
+        path: ./enclave-rpc-build
+    - name: Download artifacts (securelink)
+      uses: actions/download-artifact@v4
+      with:
+        name: securelink
+        path: ./securelink-build
+    - name: Package
+      run: |
+        set -e
+        cd enclave-rpc-build
+        chmod +x enclave-rpc
+        tar c . | gzip > ../$PACKAGE_NAME_ENCLAVE_RPC
+        cd ../securelink-build
+        tar c . | gzip > ../$PACKAGE_NAME_SECURELINK
+    - name: Publish release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ${{ env.PACKAGE_NAME_ENCLAVE_RPC }}
+          ${{ env.PACKAGE_NAME_SECURELINK }}
+        prerelease: true
