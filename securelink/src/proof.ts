@@ -2,7 +2,7 @@ import type { Proof } from "@ethereumjs/common";
 import { VwCrypto } from "./wasm.ts";
 import * as ethers from "ethers";
 
-const ethRpc = new ethers.JsonRpcProvider("https://rpc.ankr.com/eth", 1);
+const ethRpc = new ethers.JsonRpcProvider("https://mainnet.gateway.tenderly.co", 1);
 const scrRpc = new ethers.JsonRpcProvider("https://rpc.scroll.io", 534352);
 
 export async function getUnverifiedFullProof(vw: VwCrypto, blockNumber_: number, rekorEntryIndex: number): Promise<unknown> {
