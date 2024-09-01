@@ -1,0 +1,31 @@
+{
+  "name": "securelink",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-wasm": "mkdir -p build && ../vwcrypto/build.sh && cp ../vwcrypto/target/wasm32-wasip1/release/vwcrypto.wasm ./build/",
+    "check": "tsc -p tsconfig.json",
+    "bundle": "esbuild --bundle cli/connect.ts --outfile=build/connect.pre.js --platform=node --format=iife && cat inject/head.js build/connect.pre.js > build/connect.mjs && rm build/connect.pre.js && esbuild --minify < build/connect.mjs > build/connect.min.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "@types/ws": "^8.5.12",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@ethereumjs/common": "^4.4.0",
+    "arg": "^5.0.2",
+    "esbuild": "^0.23.1",
+    "ethers": "^6.13.2",
+    "https-proxy-agent": "^7.0.5",
+    "ipaddr.js": "^2.2.0",
+    "isomorphic-ws": "^5.0.0",
+    "js-base64": "^3.7.7",
+    "undici": "^6.19.8",
+    "uwasi": "^1.2.0"
+  }
+}

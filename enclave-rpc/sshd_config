@@ -1,0 +1,7 @@
+Port 22
+HostKey /opt/sshd/ssh_host_ed25519_key
+AuthorizedKeysFile .ssh/authorized_keys
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+Subsystem sftp /usr/lib/ssh/sftp-server
+PidFile /tmp/sshd.pid

@@ -1,0 +1,49 @@
+[package]
+name = "vwcrypto"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+
+[dependencies]
+alloy = { version = "0.2", default-features = false, features = ["serde"] }
+alloy-trie = "0.4"
+alloy-primitives = "0.7"
+alloy-rlp = "0.3"
+anyhow = "1"
+attestation-doc-validation = "0.9"
+aws-nitro-enclaves-nsm-api = { version = "0.4", default-features = false }
+base64 = "0.22"
+blake3 = "1"
+bytes = "1"
+chacha20poly1305 = "0.10"
+ecdsa = { version = "0.16", features = ["verifying"] }
+elliptic-curve = { version = "0.13", features = ["pkcs8"] }
+faster-hex = "0.9.0"
+hex = "0.4"
+lazy_static = "1"
+libc = "0.2"
+nybbles = "0.2"
+p256 = { version = "0.13", features = ["jwk"] }
+p384 = "0.13"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+sigstore = { version = "0.9", default-features = false, features = ["rekor"] }
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+x509-verify = { version = "0.4", features = ["std", "x509", "pem"] }
+
+zktrie = { git = "https://github.com/scroll-tech/zktrie", rev = "460b8c22af65b7809164548cba1e0253b6db5a70" }
+halo2_proofs = { git = "https://github.com/privacy-scaling-explorations/halo2.git", rev = "a9e99a72a65d7c98e8a4258c2c94269c834d1c10", default-features = false }
+poseidon-base = { git = "https://github.com/scroll-tech/poseidon-circuit.git", rev = "01770178500b7d88d628ee058a0420cbc2f349d2" }
+
+[patch."https://github.com/privacy-scaling-explorations/halo2.git"]
+halo2_proofs = { git = "https://github.com/scroll-tech/halo2.git", rev = "e5ddf67e5ae16be38d6368ed355c7c41906272ab" }
